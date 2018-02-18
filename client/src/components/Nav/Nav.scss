@@ -1,0 +1,101 @@
+@import "../../style/variables.scss";
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.nav {
+	grid-area: var(--nav-area);
+	background-color: $red;
+	display: grid;
+	grid-template: 1fr / var(--nav-logo-width) 40vw 1fr;
+  grid-template-areas: "logo space paths";
+	z-index: 100;
+
+	&__logo {
+		display: block;
+		padding-left: 2vh;
+		line-height: var(--nav-height);
+
+		text-align: center;
+
+		&__link {
+			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			color: #fff;
+			font-size: calc(var(--nav-height) / 2.8);
+      text-decoration: underline currentColor;
+			display: block;
+      transition: 
+				text-decoration .07s 0s linear,  
+				transform .07s 0s linear
+      ;
+      &:hover {
+        text-decoration-color: $lime;
+        transform: scale(1.1);
+      }
+      &:focus {
+        text-decoration-color: #00ffff;
+        transform: scale(1.1);
+        outline: none;
+      }
+		}
+	}
+
+	&__paths {
+		display: flex;
+		flex-flow: row nowrap;
+		grid-area: paths;
+    list-style: none;
+
+		&__path {
+			--nav-path-hsl: hsl(120, 100%, 50%);
+			$inc: 25%;
+			flex: 1 0 2%;
+      text-align: center;
+      transition: 
+        box-shadow 0.1s 0s linear, 
+        transform 0.1s 0s linear,
+        background-color 0.1s 0s linear
+      ;
+			position: relative;
+
+			&::before {
+				@include keep("true");
+				top: -$inc - 100%;
+				height: 100% + $inc;
+				width: 100%;
+				transition: top .1s .08s linear;
+				background-color: var(--nav-path-hsl);
+				box-shadow: 0 0 2px 0.5px rgba(0, 0, 0, 0.7);
+				z-index: -1;
+			}
+
+			&:hover,
+			&:focus {
+				transform: translateY($inc);
+        // background-color: $orange;
+        &::before {
+          @include keep("true");
+          top: -$inc;
+          height: 100% + $inc;
+          width: 100%;
+					background-color: var(--nav-path-hsl);
+					color: #1b1b1b;
+          box-shadow: 0 0 2px 0.5px rgba(0, 0, 0, 0.7);
+          z-index: -1;
+        }
+			}
+
+			&__link {
+				display: block;
+				color: #fff;
+				line-height: var(--nav-height);
+				text-decoration: none;
+				font-size: calc(var(--nav-height) / 4);
+				text-transform: capitalize;
+				font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+					"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+			}
+		}
+	}
+}

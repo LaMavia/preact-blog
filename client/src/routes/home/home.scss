@@ -1,0 +1,165 @@
+@import "../../style/variables.scss";
+.home {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-flow: column nowrap;
+
+	&__header {
+		--height: calc(100vh - var(--nav-height) + 1px);
+		--btn-width: 10vw;
+		--btn-height: 6vh;
+		display: block;
+		width: 100vw;
+		height: var(--height);
+		text-align: center;
+		margin: 0;
+		position: relative;
+		z-index: 10; 
+		font-size: calc(var(--height) / 7);
+		font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+		line-height: var(--height);
+		box-shadow: inset 0 0 0 100vw #212121;
+		color: $lime;
+		&__text {
+			width: 100%;
+			height: 100%;
+			--color-left: $lime;
+			--color-right: #212121;
+			$clip-one:   polygon(0% 0%, 100% 0%,   100% 0%,   0% 0%);
+			$clip-two:   polygon(0% 0%, 100% 0%,   100% 50%,  0% 50%);
+			$clip-three: polygon(0% 0%, 100% 100%, 100% 100%, 0% 0%);
+			$clip-four:  polygon(0% 0%, 100% 0%,   100% 100%, 0% 100%);
+			$clip-five:  polygon(0% 0%, 70% 0%,    30% 100%,  0% 100%);
+			&::before, &::after {
+				@include keep('true');
+				content: "Da Blog";
+				font-size: inherit;
+				line-height: inherit;
+				font-family: inherit;
+				width: 100%;
+				height: 100%;
+			}
+			&::after { // Left
+				background-color: var(--color-left);
+				color: var(--color-right);
+				clip-path: $clip-one;
+				animation: onload 1.2s 0s ease-in-out;
+			}
+			@keyframes onload {
+				0% { 
+					clip-path: $clip-one;
+				}
+				25% {
+					clip-path: $clip-two;
+				}
+				40% {
+					clip-path: $clip-three;
+				}
+				90% {
+					clip-path: $clip-four; 
+				}
+				100% {
+					clip-path: $clip-five; 
+				}
+			}
+			&::before { // Right			
+				right: 0;
+				position: absolute;
+				background-color: var(--color-right);
+				color: var(--color-left);
+			}
+			&--loaded {
+				&::after {
+					clip-path: $clip-five;
+				}
+			}
+		}
+
+		
+
+		&__btn {
+			position: absolute;
+			bottom: 20%;
+			z-index: 10;
+			width: var(--btn-width);
+			height: var(--btn-height);
+			border: none;
+			font-size: calc(var(--btn-height) / 3.2);
+			text-transform: capitalize;
+			font-weight: 600;
+			transition: 
+				box-shadow .1s 0s linear,
+				transform .1s 0s linear
+			;
+
+			&:hover {
+				box-shadow: 3px 1.5px 2px .5px #000;
+				transform: translateY(-10%);
+			}
+			&:focus {
+				@extend .home__header__btn:hover;
+				outline: none;
+			}
+
+			&--left {
+				left: 32%;
+				background-color: #212121;
+				color: $lime;
+			}
+			&--right {
+				right: 32%;
+				background-color: $lime;
+				color: #212121;
+			}
+		}
+	}
+
+	&__posts {
+		display: flex;
+		flex-flow: row wrap;
+		width: 100%;
+		height: auto;
+		min-height: 20vh;
+		list-style: none;
+
+		&__post {
+			$height: 15vh;
+			display: block;
+			// width: calc(100% / 3);
+			flex: 1 0 30%;
+			margin: 1%;
+			height: $height;
+			// border: 2px solid #000;
+			box-shadow: 2px 1.4px 3px .1px rgba(0,0,0,0.7);
+			max-width: calc(100% / 3 - 2%);
+			overflow: hidden;
+			position: relative;
+			text-align: center;
+
+			&__link {
+				text-decoration-color: #212121;
+				&:hover {
+					.home__posts__post__link__content {
+						bottom: 0;
+					}
+				}
+				&__title {
+					line-height: $height;
+					color: #212121;
+				}
+				&__content {
+					position: absolute;
+					left: 0;
+					bottom: -100%;
+					background-color: #212121;
+					color: #fefefe;
+					width: 100%;
+					height: 100%;
+					transition: bottom .1s 0s ease-out;
+					padding: 5%;
+				}
+			}
+		}
+	}
+}

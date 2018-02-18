@@ -1,0 +1,1 @@
+export const noDupli = <T>(el: T, i: number, arr: ReadonlyArray<T>) => !arr.some(val => val === el)

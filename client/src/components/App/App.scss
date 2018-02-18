@@ -1,0 +1,12 @@
+.app {
+	width: 100vw;
+	height: auto;
+	min-height: 100%;
+	display: grid;
+  grid-template: var(--nav-height) 1fr var(--footer-height) / 1fr;
+  grid-template-areas: 
+    "nav"
+    "content"
+    "footer"
+  ;
+}

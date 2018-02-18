@@ -1,3 +1,24 @@
+@import "./variables.scss";
+:root {
+  --nav-height: 7vh;
+  --nav-logo-width: minmax(10vw, 20vh);
+  --nav-path-width: minmax(10vw, 1fr);
+  --nav-paths-length: 4;
+  --nav-path-index: 1;
+  --nav-color: #fefefe;
+  --nav-area: nav;
+  --content-area: content;
+  --footer-height: 6vh; 
+  --footer-area: footer;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
 html, body {
 	height: 100%;
 	width: 100%;
@@ -6,9 +27,19 @@ html, body {
 	background: #FAFAFA;
 	font-family: 'Helvetica Neue', arial, sans-serif;
 	font-weight: 400;
-	color: #444;
+  color: #444;
+  overflow-x: hidden;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+body::-webkit-scrollbar {
+  width: 8px;
+  background-color: $lime;
+  box-shadow: inset 1px 0 2px .5px #000;
+  z-index: -1;
+  &-thumb {
+    background-color: #111;
+  }
 }
 
 /* fallback */
@@ -33,14 +64,6 @@ html, body {
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-}
-
-* {
-	box-sizing: border-box;
-}
-
-#app {
-	height: 100%;
 }
 
 .mdc-theme--dark {
